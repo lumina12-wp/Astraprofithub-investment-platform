@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astra ProfitHub - Investment Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #001f3f;
+            --accent-gold: #ffd700;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--primary-blue);
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .brand-text h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .brand-text .accent {
+            color: var(--accent-gold);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary-blue);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .nav-item.active {
+            color: var(--accent-gold);
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+            padding-bottom: 70px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Dashboard Styles */
+        .balance-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .balance-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin: 10px 0;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .btn {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: #333;
+        }
+
+        .btn-gold {
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin: 5px 0;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .daily-reward {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .reward-icon {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+
+        /* Plans Page */
+        .plans-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .plan-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .vip-plan {
+            background: linear-gradient(45deg, var(--primary-blue), #002b5c);
+            color: white;
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .plan-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .plan-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+        }
+
+        .plan-details {
+            margin: 10px 0;
+        }
+
+        .plan-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .highlight {
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        /* Invite/Team Page */
+        .referral-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+        }
+
+        .user-id {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            text-align: center;
+            margin: 10px 0;
+            border: 1px dashed #ccc;
+        }
+
+        .referral-link {
+            display: flex;
+            margin: 15px 0;
+        }
+
+        .referral-link input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px 0 0 8px;
+            font-family: monospace;
+        }
+
+        .copy-btn {
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .referral-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .referral-list {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .referral-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .referral-tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .referral-tab.active {
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .referral-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Profile Page */
+        .profile-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .profile-info h3 {
+            margin-bottom: 5px;
+            color: var(--primary-blue);
+        }
+
+        .profile-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .profile-stat {
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .profile-stat-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .profile-stat-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .withdraw-section {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .withdraw-input {
+            display: flex;
+            margin: 10px 0;
+        }
+
+        .withdraw-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .withdraw-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .support-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #0088cc;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: var(--shadow);
+        }
+
+        .modal h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-gold);
+            outline: none;
+        }
+
+        .submit-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #002b5c;
+        }
+
+        .modal-footer {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .switch-form {
+            background: none;
+            border: none;
+            color: var(--primary-blue);
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .close-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+
+        /* Deposit Section */
+        .deposit-section {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .wallet-address {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            word-break: break-all;
+            border: 1px dashed #ccc;
+            margin: 10px 0;
+        }
+
+        /* Landing Page Styles */
+        .landing-logo {
+            width: 120px;
+            height: 120px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin: 0 auto 20px;
+        }
+
+        .landing-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-align: center;
+        }
+
+        .landing-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: white;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .auth-buttons-landing {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 3rem;
+        }
+
+        .auth-btn-landing {
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .auth-btn-landing:hover {
+            transform: scale(1.05);
+        }
+
+        .auth-container {
+            display: none;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            color: white;
+            font-weight: 500;
+        }
+
+        .auth-tab.active {
+            color: var(--accent-gold);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .back-to-landing {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landingPage">
+        <div class="container">
+            <div class="landing-logo">AP</div>
+            <h1 class="landing-title">ASTRA <span style="color: var(--accent-gold);">PROFITHUB</span></h1>
+            <p class="landing-subtitle">Smart Investments, Secure Returns</p>
+            
+            <div class="auth-buttons-landing">
+                <button class="auth-btn-landing" onclick="showAuthForm('login')">Login</button>
+                <button class="auth-btn-landing" onclick="showAuthForm('register')">Sign Up</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication Forms -->
+    <div id="authContainer" class="auth-container">
+        <div class="container">
+            <div class="header">
+                <div class="logo-section">
+                    <div class="logo">AP</div>
+                    <div class="brand-text">
+                        <h1>ASTRA <span class="accent">PROFITHUB</span></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
+                <div class="auth-tab" onclick="switchAuthTab('register')">Sign Up</div>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label for="loginUsername" style="color: white;">Username or Email:</label>
+                    <input type="text" id="loginUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword" style="color: white;">Password:</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+            
+            <!-- Registration Form -->
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="registerName" style="color: white;">Full Name:</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail" style="color: white;">Email:</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerUsername" style="color: white;">Username:</label>
+                    <input type="text" id="registerUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword" style="color: white;">Password:</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="referralCode" style="color: white;">Referral Code (Optional):</label>
+                    <input type="text" id="referralCode">
+                </div>
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+            
+            <div class="back-to-landing">
+                <button class="back-btn" onclick="backToLanding()">← Back to Home</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="appContent" style="display: none;">
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <div class="logo-section">
+                    <div class="logo">AP</div>
+                    <div class="brand-text">
+                        <h1>ASTRA <span class="accent">PROFITHUB</span></h1>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <span id="userDisplayName">User</span>
+                    <button class="btn btn-gold" onclick="logout()" style="padding: 8px 12px; font-size: 0.8rem;">Logout</button>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <div class="nav-item active" onclick="showPage('dashboardPage')">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </div>
+                <div class="nav-item" onclick="showPage('plansPage')">
+                    <i class="fas fa-gem"></i>
+                    <span>Plans</span>
+                </div>
+                <div class="nav-item" onclick="showPage('profilePage')">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </div>
+            </div>
+
+            <!-- Dashboard Page -->
+            <div id="dashboardPage" class="page active">
+                <div class="balance-card">
+                    <h3>Account Balance</h3>
+                    <div class="balance-amount">$<span id="dashboardBalance">0</span></div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="showModal('depositModal')">
+                            <i class="fas fa-plus"></i> Deposit
+                        </button>
+                        <button class="btn btn-success" onclick="showModal('withdrawModal')">
+                            <i class="fas fa-dollar-sign"></i> Withdraw
+                        </button>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Investment</div>
+                        <div class="stat-value">$<span id="totalInvestment">0</span></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Earnings</div>
+                        <div class="stat-value">$<span id="totalEarnings">0</span></div>
+                    </div>
+                </div>
+
+                <div class="daily-reward">
+                    <div class="reward-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Daily Reward Available!</h3>
+                    <p>Claim your daily $0.1 bonus</p>
+                    <button class="btn btn-gold" onclick="claimDailyReward()">Claim Reward</button>
+                </div>
+            </div>
+
+            <!-- Plans Page -->
+            <div id="plansPage" class="page">
+                <div class="balance-card">
+                    <h3>Investment Plans</h3>
+                    <p>Choose a plan that fits your goals</p>
+                </div>
+
+                <div class="plans-container">
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <div class="plan-name">VIP 1</div>
+                            <div class="plan-price">$5</div>
+                        </div>
+                        <div class="plan-details">
+                            <div class="plan-detail">
+                                <span>Daily Return:</span>
+                                <span class="highlight">$1</span>
+                            </div>
+                            <div class="plan-detail">
+                                <span>Total Return:</span>
+                                <span class="highlight">$11</span>
+                            </div>
+                            <button class="btn btn-gold" style="width: 100%; margin-top: 10px;" onclick="selectPlan('VIP 1', '5', '1', '11')">
+                                Select Plan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Page -->
+            <div id="profilePage" class="page">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar" id="profileAvatar">U</div>
+                        <div class="profile-info">
+                            <h3 id="profileName">User Name</h3>
+                            <p id="profileEmail">user@example.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <h3>Account Information</h3>
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <div class="profile-stat-value">$<span id="profileBalance">0</span></div>
+                            <div class="profile-stat-label">Balance</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value" id="profileEarnings">0</div>
+                            <div class="profile-stat-label">Total Earnings</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deposit Modal -->
+    <div id="depositModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('depositModal')">×</button>
+            <h2>Deposit Funds</h2>
+            <div class="wallet-address">
+                0x41ef699B7C10C04a6f7c47D0AB0f19CA8398583a
+            </div>
+            <button onclick="copyWalletAddress()" class="btn btn-gold" style="width: 100%; margin: 10px 0;">
+                Copy Wallet Address
+            </button>
+        </div>
+    </div>
+
+    <!-- Withdraw Modal -->
+    <div id="withdrawModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('withdrawModal')">×</button>
+            <h2>Withdraw Funds</h2>
+            <div class="form-group">
+                <label>Amount ($):</label>
+                <input type="number" id="withdrawAmount" min="5" placeholder="Enter amount">
+            </div>
+            <button class="submit-btn" onclick="requestWithdrawal()">Request Withdrawal</button>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+        let userData = {
+            balance: 0,
+            totalInvestment: 0,
+            totalEarnings: 0
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showApp();
+            }
+
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('registerForm').addEventListener('submit', handleRegister);
+        });
+
+        function showLanding() {
+            document.getElementById('landingPage').style.display = 'block';
+            document.getElementById('authContainer').style.display = 'none';
+            document.getElementById('appContent').style.display = 'none';
+        }
+
+        function showAuthForm(type) {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('authContainer').style.display = 'block';
+            switchAuthTab(type);
+        }
+
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            
+            document.querySelector(`.auth-tab:nth-child(${tab === 'login' ? 1 : 2})`).classList.add('active');
+            document.getElementById(`${tab}Form`).classList.add('active');
+        }
+
+        function backToLanding() {
+            showLanding();
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (username && password) {
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const user = users.find(u => 
+                    (u.username === username || u.email === username) && u.password === password
+                );
+
+                if (user) {
+                    currentUser = user;
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    showApp();
+                    alert('Login successful!');
+                } else {
+                    alert('Invalid credentials!');
+                }
+            }
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+
+            if (name && email && username && password) {
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                
+                if (users.find(u => u.username === username)) {
+                    alert('Username already exists!');
+                    return;
+                }
+                
+                if (users.find(u => u.email === email)) {
+                    alert('Email already registered!');
+                    return;
+                }
+
+                const newUser = {
+                    id: Date.now().toString(),
+                    name,
+                    email,
+                    username,
+                    password,
+                    joinDate: new Date().toISOString()
+                };
+
+                users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                alert('Registration successful! Please login.');
+                switchAuthTab('login');
+            }
+        }
+
+        function showApp() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('authContainer').style.display = 'none';
+            document.getElementById('appContent').style.display = 'block';
+            updateUserDisplay();
+            loadUserData();
+        }
+
+        function updateUserDisplay() {
+            if (currentUser) {
+                document.getElementById('userDisplayName').textContent = currentUser.name;
+                document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+                document.getElementById('profileName').textContent = currentUser.name;
+                document.getElementById('profileEmail').textContent = currentUser.email;
+                document.getElementById('profileAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+            }
+        }
+
+        function loadUserData() {
+            if (currentUser) {
+                const savedData = localStorage.getItem(`userData_${currentUser.id}`);
+                if (savedData) {
+                    userData = JSON.parse(savedData);
+                }
+                updateDashboard();
+            }
+        }
+
+        function saveUserData() {
+            if (currentUser) {
+                localStorage.setItem(`userData_${currentUser.id}`, JSON.stringify(userData));
+                updateDashboard();
+            }
+        }
+
+        function updateDashboard() {
+            document.getElementById('dashboardBalance').textContent = userData.balance.toFixed(2);
+            document.getElementById('totalInvestment').textContent = userData.totalInvestment.toFixed(2);
+            document.getElementById('totalEarnings').textContent = userData.totalEarnings.toFixed(2);
+            document.getElementById('profileBalance').textContent = userData.balance.toFixed(2);
+            document.getElementById('profileEarnings').textContent = userData.totalEarnings.toFixed(2);
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            
+            document.getElementById(pageId).classList.add('active');
+            
+            const navMap = {
+                'dashboardPage': 0,
+                'plansPage': 1,
+                'profilePage': 2
+            };
+            
+            document.querySelectorAll('.nav-item')[navMap[pageId]].classList.add('active');
+        }
+
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function selectPlan(name, price, dailyReturn, totalReturn) {
+            alert(`Selected ${name}: $${price} investment`);
+            showModal('depositModal');
+        }
+
+        function copyWalletAddress() {
+            navigator.clipboard.writeText("0x41ef699B7C10C04a6f7c47D0AB0f19CA8398583a").then(() => {
+                alert('Wallet address copied!');
+            });
+        }
+
+        function claimDailyReward() {
+            userData.balance += 0.1;
+            userData.totalEarnings += 0.1;
+            saveUserData();
+            alert('Daily reward claimed! $0.1 added to your balance.');
+        }
+
+        function requestWithdrawal() {
+            const amount = parseFloat(document.getElementById('withdrawAmount').value);
+            
+            if (amount >= 5 && amount <= userData.balance) {
+                userData.balance -= amount;
+                saveUserData();
+                alert(`Withdrawal request for $${amount} submitted!`);
+                closeModal('withdrawModal');
+            } else {
+                alert('Invalid amount or insufficient balance! Minimum: $5');
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            showLanding();
+            alert('Logged out successfully!');
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
